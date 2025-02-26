@@ -11,7 +11,7 @@ jobs:
             PORT: 6666
         steps:
             - run: echo "running tests"
-            - run: echo $POSTGRES_PASSWORD
             - run: ls ${{ github.workspace }}
+            - run: go test
     # Deploy:
     #     name: Deploy to EC2
