@@ -1,0 +1,17 @@
+name: Deploy
+run-name: ${{ github.actor }} deploying challenge on EC2
+on: [push]
+jobs:
+    Test: 
+        name: Run server and db tests
+        runs-on: ubuntu-latest
+        env: 
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            PORT: 6666
+        steps:
+            - run: echo "running tests"
+            - run: echo $POSTGRES_PASSWORD
+            - run: ls ${{ github.workspace }}
+    # Deploy:
+    #     name: Deploy to EC2
