@@ -1,0 +1,92 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Minimal ping API server
+paths:
+  /orders:
+    get:
+      description: Returns all orders
+      responses:
+        '200':
+          description: returns all orders stored in database
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllOrders'
+        '500':
+          description: server error
+    post:
+      description: Creates a new order
+      requestBody:
+        description: order details needed to create an order
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewOrder"
+      responses:
+        '201':
+          description: create new order response
+        '400':
+          description: data wasn't in the correct format
+        '500':
+          description: server error
+components:
+  schemas:
+    AllOrders:
+      type: array
+      items:
+        $ref: '#/components/schemas/Order'
+      example:
+        order_1:
+          - id: 1
+          - symbol: MSFT
+          - price: 100.20
+          - quantity: 400
+          - orderType: market
+
+    NewOrder:
+      type: object
+      required:
+        - symbol
+        - price
+        - quantity
+        - orderType
+      properties:
+        symbol:
+          type: string
+          example: MSFT
+        price:
+          type: number
+          format: double
+          example: 100.20
+        quantity:
+          type: integer
+          example: 400
+        orderType:
+          type: string 
+          example: market
+    Order:
+      type: object
+      required:
+        - id
+        - symbol
+        - price
+        - quantity
+        - orderType
+      properties:
+        id:
+          type: integer
+          example: 1
+        symbol:
+          type: string
+          example: MSFT
+        price:
+          type: number
+          format: double
+          example: 100.20
+        quantity:
+          type: integer
+          example: 400
+        orderType:
+          type: string 
+          example: market

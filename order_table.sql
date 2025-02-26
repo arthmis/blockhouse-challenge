@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS orders (
+    id SERIAL PRIMARY KEY,
+    symbol TEXT NOT NULL,
+    price DOUBLE PRECISION NOT NULL,
+    quantity INTEGER NOT NULL,
+    order_type TEXT NOT NULL
+);
